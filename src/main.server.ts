@@ -271,4 +271,5 @@ async function handler (requestingPlayer: Player, name: string, state: Enum.User
     mousedown = false
   }
 }
+
 inputRemote.OnServerEvent.Connect(handler as Callback)
