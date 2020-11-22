@@ -22,17 +22,19 @@ const settings = {
     "I'm a script in a legogame that's feared by God himself",
     "My name is bragle and you're in a snaggle",
     "Scadeet scadoodle you've been removeled",
-
   ],
   unBanishMessages: [
     'you are unbanished now lol',
     "you're unbanished now you can respawn",
-
+    'you are free now',
+    'RESURRECTED!'
   ],
   taunts: [
     "ez",
     "you botta die lol",
-    "You're a troll, time to be rolled!"
+    'The almighty bragle strikes again!',
+    'bragle is real',
+    'Your god is here.',
   ]
 }
 
@@ -68,7 +70,7 @@ const LightningBolt = require(386839042) as {
 
 
 function say (msg: string) {
-  const chatfrom = settings.keepCharacter ? char.Head : char.HumanoidRootPart
+  const chatfrom = char.Head
   Chat.Chat(chatfrom, msg, Enum.ChatColor.Green)
 }
 
@@ -104,9 +106,9 @@ sound.Play()
 // \\====================================================//
 if (!settings.keepCharacter) {
   for (const instance of char.GetChildren()) {
-    if (instance.IsA('BasePart') && instance.Name !== 'HumanoidRootPart') {
-      instance.Transparency = 1
-    }
+    // if (instance.IsA('BasePart') && instance.Name !== 'HumanoidRootPart') {
+    //   instance.Transparency = 1
+    // }
     // if (char.Humanoid.RigType === Enum.HumanoidRigType.R6) {
     //   if (instance.Name.endsWith(' Leg')) instance.Destroy()
     // }
@@ -114,8 +116,12 @@ if (!settings.keepCharacter) {
   }
   const face = char.Head.FindFirstChild('face')
   if (face) face.Destroy()
+
+  const mesh = char.Head.FindFirstChildWhichIsA('DataModelMesh')
+  if (mesh) mesh.Destroy()
+  
   for (const side of Enum.NormalId.GetEnumItems()) {
-    const decal = new Instance('Decal', char.HumanoidRootPart)
+    const decal = new Instance('Decal', char.Head)
     decal.Texture = 'rbxassetid://4510940464'
     decal.Face = side
   }
@@ -172,18 +178,6 @@ async function kill (part: BasePart, banish: boolean) {
 
   // Ignore lightning bolts
   if (maxparent.Name === 'LightningBolt' && !maxparent.FindFirstChild('Humanoid')) return
-
-  // Kill rainbow puncher
-  if (maxparent.FindFirstChild('RainbowShine')) {
-    const puncherstorage = ServerScriptService.GetChildren().find(instance => {
-      return instance.Name.lower().split("'s")[0] === maxparent.Name.lower()
-    })
-    new Instance('StringValue', puncherstorage).Name = "Alright Rainbow, it's time for you to stop ok?"
-    wait(.1)
-    if (puncherstorage && puncherstorage.Parent) {
-      puncherstorage.Destroy()
-    }
-  }
 
   // const vplr = Players.GetPlayerFromCharacter(maxparent)
   // if (vplr) {
