@@ -155,6 +155,7 @@ function endsWith (str: string, search: string, this_len = str.size()) {
 //                    KILL FUNCTION
 // \\====================================================//
 async function kill (part: BasePart, banish: boolean) {
+  // Kill CR Scripts/Banishers/Lost Soul
   if (endsWith(part.Name, " tracker")) {
     const crstorage = ReplicatedStorage.FindFirstChild(part.Name.split(' ')[0])
     if (crstorage) {
@@ -164,20 +165,31 @@ async function kill (part: BasePart, banish: boolean) {
       }
     }
   }
+
+  // Get max parent
   let maxparent = part.Parent === Workspace ? part : part.FindFirstAncestorWhichIsA('Model') || part
   if (maxparent.Parent === char || maxparent === char) return
 
+  // Ignore lightning bolts
   if (maxparent.Name === 'LightningBolt' && !maxparent.FindFirstChild('Humanoid')) return
+
+  // Kill rainbow puncher
   if (maxparent.FindFirstChild('RainbowShine')) {
     const puncherstorage = ServerScriptService.GetChildren().find(instance => {
       return instance.Name.lower().split("'s")[0] === maxparent.Name.lower()
     })
     new Instance('StringValue', puncherstorage).Name = "Alright Rainbow, it's time for you to stop ok?"
+    wait(.1)
+    if (puncherstorage && puncherstorage.Parent) {
+      puncherstorage.Destroy()
+    }
   }
+
   // const vplr = Players.GetPlayerFromCharacter(maxparent)
   // if (vplr) {
   //   vplr.LoadCharacter()
   // }
+
   if (banish) banished.push(maxparent.Name)
   maxparent.Destroy()
   // todo: animation like in lightning cannon
