@@ -1,0 +1,21 @@
+{
+  "name": "bragle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rbxtsc && rojo build -o model.rbxmx",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rbxts/compiler-types": "^1.0.0-beta.4.0",
+    "@rbxts/types": "^1.0.428"
+  },
+  "dependencies": {
+    "@rbxts/services": "^1.1.2",
+    "roblox-ts": "^1.0.0-beta.4"
+  }
+}
