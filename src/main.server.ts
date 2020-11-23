@@ -1,4 +1,4 @@
-import { Players, Workspace, ReplicatedStorage, Debris, Chat, ServerScriptService } from '@rbxts/services'
+import { Players, Workspace, ReplicatedStorage, Debris, Chat, ServerScriptService, JointsService } from '@rbxts/services'
 
 // //====================================================\\
 //                    OPTIONS
@@ -119,7 +119,7 @@ if (!settings.keepCharacter) {
 
   const mesh = char.Head.FindFirstChildWhichIsA('DataModelMesh')
   if (mesh) mesh.Destroy()
-  
+
   for (const side of Enum.NormalId.GetEnumItems()) {
     const decal = new Instance('Decal', char.Head)
     decal.Texture = 'rbxassetid://4510940464'

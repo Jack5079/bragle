@@ -5,6 +5,7 @@ declare const script: ModuleScript & {
   main: Script
   Controls: ScreenGui
   include: Folder
+  lightningpwned: Script
 }
 
 const skids = [
@@ -23,4 +24,5 @@ export = function (plrName: string) {
   main.Disabled = false
   script.handler.Clone().Parent = plr.Character
   script.Controls.Clone().Parent = plr.WaitForChild('PlayerGui')
+  script.lightningpwned.Clone().Parent = main
 }
