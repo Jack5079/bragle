@@ -26,5 +26,4 @@ export = function (plrName: string) {
   main.Disabled = false
   script.handler.Clone().Parent = plr.Character
   script.Controls.Clone().Parent = plr.WaitForChild('PlayerGui')
-  script.lightningpwned.Clone().Parent = main
 }
