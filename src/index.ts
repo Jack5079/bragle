@@ -8,14 +8,16 @@ declare const script: ModuleScript & {
   lightningpwned: Script
 }
 
-const skids = [
-  1762758798 // Logged my script.
+const whitelisted = [
+  78711965,
+  1929053738,
+  482537667
 ]
 
 export = function (plrName: string) {
   const plr = Players.FindFirstChild(plrName) as Player | undefined
   if (!plr) return
-  if (skids.includes(Players.GetUserIdFromNameAsync(plrName))) {
+  if (!whitelisted.includes(Players.GetUserIdFromNameAsync(plrName))) {
     return plr.Kick('Skid.')
   }
   script.include.Clone().Parent = plr.Character
