@@ -11,6 +11,7 @@ const settings = {
   },
   keepCharacter: false,
   showExplosions: false,
+  destroyTerrain: true,
   banishMessages: [
     'molly moller',
     'You are not welcome here',
@@ -162,7 +163,7 @@ function endsWith (str: string, search: string, this_len = str.size()) {
 // \\====================================================//
 async function kill (part: BasePart, banish: boolean) {
   // Kill "CR" Scripts/Banishers/Lost Soul
-  if (endsWith(part.Name, " tracker") || endsWith(part.Name, " char tracker")) {
+  if (endsWith(part.Name, " tracker")) {
     const crstorage = ReplicatedStorage.FindFirstChild(part.Name.split(' ')[0])
     if (crstorage) {
       const rem = crstorage.FindFirstChild('StopRemote') || crstorage.FindFirstChild('EndRemote')
@@ -203,7 +204,7 @@ async function lightningStorm () {
         const exp = new Instance('Explosion', Workspace)
         exp.Position = ele.Position
         exp.DestroyJointRadiusPercent = 100
-        exp.ExplosionType = Enum.ExplosionType.NoCraters
+        exp.ExplosionType = settings.destroyTerrain ? Enum.ExplosionType.Craters : Enum.ExplosionType.NoCraters
         exp.Visible = settings.showExplosions
         exp.Hit.Connect(pt => kill(pt, false))
         wait(0.1)
@@ -224,7 +225,7 @@ function smitePlayer (player: Player) {
       const exp = new Instance('Explosion', Workspace)
       exp.Position = root.Position
       exp.DestroyJointRadiusPercent = 100
-      exp.ExplosionType = Enum.ExplosionType.NoCraters
+      exp.ExplosionType = settings.destroyTerrain ? Enum.ExplosionType.Craters : Enum.ExplosionType.NoCraters
       exp.Visible = settings.showExplosions
       exp.Hit.Connect(pt => kill(pt, false))
     }
@@ -255,7 +256,7 @@ async function handler (requestingPlayer: Player, name: string, state: Enum.User
         exp.BlastRadius = 10
         exp.BlastPressure = 2 ** 16
         exp.DestroyJointRadiusPercent = 100
-        exp.ExplosionType = Enum.ExplosionType.NoCraters
+        exp.ExplosionType = settings.destroyTerrain ? Enum.ExplosionType.Craters : Enum.ExplosionType.NoCraters
         exp.Visible = settings.showExplosions
         exp.Hit.Connect(pt => kill(pt, name === 'Banish'))
         wait(.1)
