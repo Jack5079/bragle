@@ -186,6 +186,7 @@ async function kill (part: BasePart, banish: boolean) {
   // }
 
   if (banish) banished.push(maxparent.Name)
+  maxparent.Archivable = false
   maxparent.Destroy()
   // todo: animation like in lightning cannon
 }
