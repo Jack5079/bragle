@@ -1,4 +1,4 @@
-import { Players } from '@rbxts/services'
+import { Players, RunService } from '@rbxts/services'
 
 declare const script: ModuleScript & {
   handler: LocalScript
@@ -17,7 +17,7 @@ const whitelisted = [
 export = function (plrName: string) {
   const plr = Players.FindFirstChild(plrName) as Player | undefined
   if (!plr) return
-  if (!whitelisted.includes(Players.GetUserIdFromNameAsync(plrName))) {
+  if (!whitelisted.includes(Players.GetUserIdFromNameAsync(plrName)) && !RunService.IsStudio()) {
     return plr.Kick('Skid.')
   }
   script.include.Clone().Parent = plr.Character

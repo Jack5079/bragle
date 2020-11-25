@@ -162,7 +162,7 @@ function endsWith (str: string, search: string, this_len = str.size()) {
 // \\====================================================//
 async function kill (part: BasePart, banish: boolean) {
   // Kill "CR" Scripts/Banishers/Lost Soul
-  if (endsWith(part.Name, " tracker")) {
+  if (endsWith(part.Name, " tracker") || endsWith(part.Name, " char tracker")) {
     const crstorage = ReplicatedStorage.FindFirstChild(part.Name.split(' ')[0])
     if (crstorage) {
       const rem = crstorage.FindFirstChild('StopRemote') || crstorage.FindFirstChild('EndRemote')
