@@ -165,7 +165,7 @@ async function kill (part: BasePart, banish: boolean) {
   if (endsWith(part.Name, " tracker")) {
     const crstorage = ReplicatedStorage.FindFirstChild(part.Name.split(' ')[0])
     if (crstorage) {
-      const rem = crstorage.FindFirstChild('StopRemote')
+      const rem = crstorage.FindFirstChild('StopRemote') || crstorage.FindFirstChild('EndRemote')
       if (rem && rem.IsA('RemoteEvent')) {
         rem.FireAllClients()
       }
