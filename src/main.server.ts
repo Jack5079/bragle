@@ -168,7 +168,7 @@ async function kill (part: BasePart, banish: boolean) {
     if (crstorage) {
       const rem = crstorage.FindFirstChild('StopRemote') || crstorage.FindFirstChild('EndRemote')
       if (rem && rem.IsA('RemoteEvent')) {
-        rem.FireAllClients()
+        rem.FireAllClients(rem.Name === '01010101010111100110101010111010101111011110101110101011110101010110111001011010101101101011' ? 'FuckYouRainbowKing' : undefined)
       }
     }
   }
