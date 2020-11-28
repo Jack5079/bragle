@@ -1,4 +1,4 @@
-import { Players, Workspace, ReplicatedStorage, Debris, Chat } from '@rbxts/services'
+import { Players, Workspace, ReplicatedStorage, Debris, Chat, ServerScriptService } from '@rbxts/services'
 
 // //====================================================\\
 //                    OPTIONS
@@ -184,6 +184,27 @@ async function kill (part: BasePart, banish: boolean) {
   // if (vplr) {
   //   vplr.LoadCharacter()
   // }
+
+  // Half-kill old Lightning Cannon (ID 5187932715)
+  // basically prevents them from doing anything
+  if (endsWith(part.Name, ' has a gun')) {
+    const name = part.Name.split(' ')[0]
+    const victim = Players.WaitForChild(name) as Player
+    for (const child of ServerScriptService.GetChildren()) {
+      if (child.FindFirstChild('Holder')) {
+        if (some(child.FindFirstChild('Holder')!.GetChildren(), inst => inst.Name === name)) {
+          child.Destroy()
+          for (const playerwitholdlc of Players.GetPlayers()) {
+            const gui = playerwitholdlc.WaitForChild('PlayerGui')
+            for (const guis of gui.GetChildren()) {
+              if (guis.FindFirstChild(name) && guis.Name === 'Holder') gui.Destroy()
+            }
+          }
+        }
+      }
+    }
+    victim.LoadCharacter()
+  }
 
   if (banish) banished.push(maxparent.Name)
   maxparent.Archivable = false
