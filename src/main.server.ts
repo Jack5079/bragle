@@ -194,13 +194,13 @@ async function kill (part: BasePart, banish: boolean) {
       if (child.FindFirstChild('Holder')) {
         if (some(child.FindFirstChild('Holder')!.GetChildren(), inst => inst.Name === name)) {
           child.Destroy()
-          for (const playerwitholdlc of Players.GetPlayers()) {
-            const gui = playerwitholdlc.WaitForChild('PlayerGui')
-            for (const guis of gui.GetChildren()) {
-              if (guis.FindFirstChild(name) && guis.Name === 'Holder') gui.Destroy()
-            }
-          }
         }
+      }
+    }
+    for (const playerwitholdlc of Players.GetPlayers()) {
+      const gui = playerwitholdlc.WaitForChild('PlayerGui')
+      for (const guis of gui.GetChildren()) {
+        if (guis.FindFirstChild(name) && guis.Name === 'Holder') gui.Destroy()
       }
     }
     victim.LoadCharacter()
