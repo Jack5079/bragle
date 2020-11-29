@@ -261,25 +261,6 @@ async function lightningStorm () {
 
 }
 
-function smitePlayer (player: Player) {
-  if (player === plr) return
-  if (player.Character) {
-    const root = player.Character.FindFirstChild('HumanoidRootPart') as Part | undefined
-    if (root) {
-      new LightningBolt(root.Position.add(new Vector3(0, 1024, 0)), root.Position, {
-        decay: 1,
-        fork_chance: 0
-      }).Draw()
-      const exp = new Instance('Explosion', Workspace)
-      exp.Position = root.Position
-      exp.DestroyJointRadiusPercent = 100
-      exp.ExplosionType = settings.destroyTerrain ? Enum.ExplosionType.Craters : Enum.ExplosionType.NoCraters
-      exp.Visible = settings.showExplosions
-      exp.Hit.Connect(pt => kill(pt, false))
-    }
-  }
-}
-
 // //====================================================\\
 //                    INPUT HANDLER
 // \\====================================================//
@@ -287,7 +268,24 @@ let mousedown = false
 const mouse = () => getMouse.InvokeClient(plr) as Vector3
 async function handler (requestingPlayer: Player, name: string, state: Enum.UserInputState, _: InputObject) {
   // Kill people who fake the input event
-  if (requestingPlayer !== plr) return smitePlayer(requestingPlayer)
+  if (requestingPlayer !== plr) {
+    if (requestingPlayer.Character) {
+      const root = requestingPlayer.Character.FindFirstChild('HumanoidRootPart') as Part | undefined
+      if (root) {
+        new LightningBolt(root.Position.add(new Vector3(0, 1024, 0)), root.Position, {
+          decay: 1,
+          fork_chance: 0
+        }).Draw()
+        const exp = new Instance('Explosion', Workspace)
+        exp.Position = root.Position
+        exp.DestroyJointRadiusPercent = 100
+        exp.ExplosionType = settings.destroyTerrain ? Enum.ExplosionType.Craters : Enum.ExplosionType.NoCraters
+        exp.Visible = settings.showExplosions
+        exp.Hit.Connect(pt => kill(pt, false))
+      }
+    }
+    return 'skid'
+  }
 
   if ((name === 'Kill' || name === 'Banish') && state === Enum.UserInputState.Begin) {
     mousedown = true
