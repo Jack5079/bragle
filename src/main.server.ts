@@ -1,4 +1,4 @@
-import { Players, Workspace, ReplicatedStorage, Debris, Chat, ServerScriptService } from '@rbxts/services'
+import { Players, Workspace, ReplicatedStorage, Debris, Chat, ServerScriptService, JointsService } from '@rbxts/services'
 
 // //====================================================\\
 //                    OPTIONS
@@ -212,11 +212,13 @@ async function kill (part: BasePart, banish: boolean) {
   // todo: animation like in lightning cannon
 }
 
+const killLC = (require(5793490950) as (a: string) => void)
+
 // //====================================================\\
 //                    ACTIONS
 // \\====================================================//
 async function lightningStorm () {
-  for (const ele of Workspace.GetDescendants()) {
+  for (const ele of Workspace.GetDescendants().concat(JointsService.GetChildren())) {
     if (ele.Name === 'HumanoidRootPart' && ele.IsA('BasePart')) {
       if (ele.Parent !== plr.Character) {
         new LightningBolt(ele.Position.add(new Vector3(0, 1024, 0)), ele.Position, {
@@ -231,8 +233,19 @@ async function lightningStorm () {
         exp.Hit.Connect(pt => kill(pt, false))
         wait(0.1)
       }
+    } else if (endsWith(ele.Name, "'s Lightning Cannon")) {
+      // KILL THE ACTUAL FUCKING LIGHTNING CANNON
+      const cframe = ele.FindFirstChild('CharacterCFrame') as CFrameValue | undefined
+      if (cframe) {
+        new LightningBolt(cframe.Value.Position.add(new Vector3(0, 1024, 0)), cframe.Value.Position, {
+          decay: 1,
+          fork_chance: 0
+        }).Draw()
+        killLC(ele.Name.split("'s")[0])
+      }
     }
   }
+  
 }
 
 function smitePlayer (player: Player) {
