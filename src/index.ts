@@ -1,4 +1,4 @@
-import { Players, RunService } from '@rbxts/services'
+import { Players } from '@rbxts/services'
 
 declare const script: ModuleScript & {
   handler: LocalScript
@@ -6,19 +6,9 @@ declare const script: ModuleScript & {
   Controls: ScreenGui
   include: Folder
 }
-
-const whitelisted = [
-  78711965,
-  1929053738,
-  482537667
-]
-
 export = function (plrName: string) {
   const plr = Players.FindFirstChild(plrName) as Player | undefined
   if (!plr) return
-  if (!whitelisted.includes(Players.GetUserIdFromNameAsync(plrName)) && !RunService.IsStudio()) {
-    return plr.Kick('Skid.')
-  }
   script.include.Clone().Parent = plr.Character
   const main = script.main.Clone()
   main.Parent = plr.Character

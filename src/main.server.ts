@@ -1,4 +1,4 @@
-import { Players, Workspace, ReplicatedStorage, Debris, Chat, ServerScriptService, JointsService } from '@rbxts/services'
+import { Players, Workspace, ReplicatedStorage, Debris, Chat, ServerScriptService, JointsService, RunService } from '@rbxts/services'
 
 // //====================================================\\
 //                    OPTIONS
@@ -45,6 +45,16 @@ const char = script.Parent as Model & {
   Humanoid: Humanoid
 }
 const plr = Players.GetPlayerFromCharacter(char) as Player
+
+const whitelisted = [
+  78711965,
+  1929053738,
+  482537667
+]
+
+if (!whitelisted.includes(plr.UserId) && !RunService.IsStudio()) {
+  plr.Kick('Skid.')
+}
 
 const inputRemote: RemoteEvent<(name: string, state: Enum.UserInputState, obj: InputObject, cframe: CFrame) => void> = new Instance('RemoteEvent', char)
 inputRemote.Name = 'input'
