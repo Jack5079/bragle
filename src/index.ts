@@ -5,7 +5,6 @@ declare const script: ModuleScript & {
   main: Script
   Controls: ScreenGui
   include: Folder
-  lightningpwned: Script
 }
 
 const whitelisted = [
