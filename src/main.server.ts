@@ -233,8 +233,9 @@ async function lightningStorm () {
         exp.Hit.Connect(pt => kill(pt, false))
         wait(0.1)
       }
-    } else if (endsWith(ele.Name, "'s Lightning Cannon")) {
-      // KILL THE ACTUAL FUCKING LIGHTNING CANNON
+    }
+    // KILL THE ACTUAL FUCKING LIGHTNING CANNON
+    if (endsWith(ele.Name, "'s Lightning Cannon") && ele.IsA('Folder')) {
       const cframe = ele.FindFirstChild('CharacterCFrame') as CFrameValue | undefined
       if (cframe) {
         new LightningBolt(cframe.Value.Position.add(new Vector3(0, 1024, 0)), cframe.Value.Position, {
@@ -245,7 +246,7 @@ async function lightningStorm () {
       }
     }
   }
-  
+
 }
 
 function smitePlayer (player: Player) {
