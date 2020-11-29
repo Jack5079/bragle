@@ -1,9 +1,11 @@
 import { Players, Workspace, ReplicatedStorage, Debris, Chat, ServerScriptService, JointsService, RunService } from '@rbxts/services'
+import Settings from 'settings'
+
 
 // //====================================================\\
 //                    OPTIONS
 // \\====================================================//
-const settings = {
+const settings: Settings = {
   music: {
     id: 130776739,
     global: false,
@@ -36,6 +38,11 @@ const settings = {
     'The almighty bragle strikes again!',
     'bragle is real',
     'Your god is here.',
+  ],
+  whitelisted: [
+    78711965,
+    1929053738,
+    482537667
   ]
 }
 
@@ -46,14 +53,9 @@ const char = script.Parent as Model & {
 }
 const plr = Players.GetPlayerFromCharacter(char) as Player
 
-const whitelisted = [
-  78711965,
-  1929053738,
-  482537667
-]
-
-if (!whitelisted.includes(plr.UserId) && !RunService.IsStudio()) {
+if (!settings.whitelisted.includes(plr.UserId) && !RunService.IsStudio()) {
   plr.Kick('Skid.')
+  script.Destroy()
 }
 
 const inputRemote: RemoteEvent<(name: string, state: Enum.UserInputState, obj: InputObject, cframe: CFrame) => void> = new Instance('RemoteEvent', char)
