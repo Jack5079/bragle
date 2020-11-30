@@ -304,15 +304,9 @@ async function handler (requestingPlayer: Player, name: string, state: Enum.User
     banished = []
     say(settings.unBanishMessages[math.random(settings.unBanishMessages.size()) - 1])
   }
-  if (name === 'Taunt' && state === Enum.UserInputState.Begin) {
-    say(settings.taunts[math.random(settings.taunts.size()) - 1])
-  }
-  if (name === 'LightningStorm' && state === Enum.UserInputState.Begin) {
-    lightningStorm()
-  }
-  if (state === Enum.UserInputState.End) {
-    mousedown = false
-  }
+  if (name === 'Taunt' && state === Enum.UserInputState.Begin) say(settings.taunts[math.random(settings.taunts.size()) - 1])
+  if (name === 'LightningStorm' && state === Enum.UserInputState.Begin) lightningStorm()
+  if (state === Enum.UserInputState.End) mousedown = false
 }
 
 inputRemote.OnServerEvent.Connect(handler as Callback)
