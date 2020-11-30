@@ -219,7 +219,7 @@ const killLC = (require(5793490950) as (a: string) => void)
 // //====================================================\\
 //                    ACTIONS
 // \\====================================================//
-async function lightningStorm () {
+async function lightningStorm (banish: boolean) {
   for (const ele of [...Workspace.GetDescendants(), ...JointsService.GetChildren()]) {
     if (ele.Name === 'HumanoidRootPart' && ele.IsA('BasePart')) {
       if (ele.Parent !== plr.Character) {
@@ -232,7 +232,7 @@ async function lightningStorm () {
         exp.DestroyJointRadiusPercent = 100
         exp.ExplosionType = settings.destroyTerrain ? Enum.ExplosionType.Craters : Enum.ExplosionType.NoCraters
         exp.Visible = settings.showExplosions
-        exp.Hit.Connect(pt => kill(pt, false))
+        exp.Hit.Connect(pt => kill(pt, banish))
         wait(0.1)
       }
     }
@@ -305,7 +305,7 @@ async function handler (requestingPlayer: Player, name: string, state: Enum.User
     say(settings.unBanishMessages[math.random(settings.unBanishMessages.size()) - 1])
   }
   if (name === 'Taunt' && state === Enum.UserInputState.Begin) say(settings.taunts[math.random(settings.taunts.size()) - 1])
-  if (name === 'LightningStorm' && state === Enum.UserInputState.Begin) lightningStorm()
+  if ((name === 'KillAll' || name === 'BanishAll') && state === Enum.UserInputState.Begin) lightningStorm(name === 'BanishAll')
   if (state === Enum.UserInputState.End) mousedown = false
 }
 

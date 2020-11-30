@@ -48,10 +48,10 @@
 				<Ref name="NextSelectionRight">null</Ref>
 				<Ref name="NextSelectionUp">null</Ref>
 				<UDim2 name="Position">
-					<XS>0.620999992</XS>
+					<XS>0.5</XS>
 					<XO>0</XO>
-					<YS>0.939999998</YS>
-					<YO>0</YO>
+					<YS>1</YS>
+					<YO>-50</YO>
 				</UDim2>
 				<Ref name="RootLocalizationTable">null</Ref>
 				<float name="Rotation">0</float>
@@ -459,15 +459,24 @@
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
 						<string name="Name">LocalScript</string>
-						<string name="ScriptGuid">{83BE35FD-0151-45E7-A655-6E61D1D1FD04}</string>
+						<string name="ScriptGuid">{58D176F7-E8A4-449F-ADFC-C72BC7D6B5CD}</string>
 						<ProtectedString name="Source"><![CDATA[local shown = false
+local tween = game:GetService('TweenService')
+local close = tween:Create(script.Parent.Parent, TweenInfo.new(1,Enum.EasingStyle.Bounce, Enum.EasingDirection.Out), {
+	Position = UDim2.new(0.5, 0,1, -50)
+})
+local open = tween:Create(script.Parent.Parent, TweenInfo.new(1,Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+	Position = UDim2.new(0.5, 0,1, -208)
+})
 
 script.Parent.MouseButton1Click:Connect(function ()
 	shown = not shown
 	if shown then
-		script.Parent.Parent:TweenPosition(UDim2.new(0.621, 0,0.672, 0))
-	else 
-		script.Parent.Parent:TweenPosition(UDim2.new(0.621, 0,0.94, 0))
+		-- close
+		close:Play()
+	else
+		-- open 
+		open:Play()
 	end
 end)]]></ProtectedString>
 						<int64 name="SourceAssetId">-1</int64>
@@ -591,7 +600,7 @@ end)]]></ProtectedString>
 					<token name="Font">36</token>
 					<int name="LayoutOrder">0</int>
 					<float name="LineHeight">1</float>
-					<string name="Name">5Light</string>
+					<string name="Name">5KillAll</string>
 					<Ref name="NextSelectionDown">null</Ref>
 					<Ref name="NextSelectionLeft">null</Ref>
 					<Ref name="NextSelectionRight">null</Ref>
@@ -616,7 +625,7 @@ end)]]></ProtectedString>
 					<token name="SizeConstraint">0</token>
 					<int64 name="SourceAssetId">-1</int64>
 					<BinaryString name="Tags"></BinaryString>
-					<string name="Text">L - Lightning Storm</string>
+					<string name="Text">L - Kill All</string>
 					<Color3 name="TextColor3">
 						<R>0.776470602</R>
 						<G>0.776470602</G>
@@ -639,6 +648,94 @@ end)]]></ProtectedString>
 					<int name="ZIndex">1</int>
 				</Properties>
 				<Item class="UICorner" referent="RBX6F2CCD286EF44116B0E8E094DB706A87">
+					<Properties>
+						<BinaryString name="AttributesSerialize"></BinaryString>
+						<UDim name="CornerRadius">
+							<S>0.100000001</S>
+							<O>0</O>
+						</UDim>
+						<string name="Name">UICorner</string>
+						<int64 name="SourceAssetId">-1</int64>
+						<BinaryString name="Tags"></BinaryString>
+					</Properties>
+				</Item>
+			</Item>
+			<Item class="TextLabel" referent="RBXB613CDDFA51C4D0A8A52E8CB13DD9DB1">
+				<Properties>
+					<bool name="Active">false</bool>
+					<Vector2 name="AnchorPoint">
+						<X>0</X>
+						<Y>0</Y>
+					</Vector2>
+					<BinaryString name="AttributesSerialize"></BinaryString>
+					<bool name="AutoLocalize">true</bool>
+					<token name="AutomaticSize">0</token>
+					<Color3 name="BackgroundColor3">
+						<R>0.211764708</R>
+						<G>0.211764708</G>
+						<B>0.211764708</B>
+					</Color3>
+					<float name="BackgroundTransparency">1</float>
+					<Color3 name="BorderColor3">
+						<R>0.105882354</R>
+						<G>0.164705887</G>
+						<B>0.20784314</B>
+					</Color3>
+					<token name="BorderMode">0</token>
+					<int name="BorderSizePixel">1</int>
+					<bool name="ClipsDescendants">false</bool>
+					<bool name="Draggable">false</bool>
+					<token name="Font">36</token>
+					<int name="LayoutOrder">0</int>
+					<float name="LineHeight">1</float>
+					<string name="Name">6BanishAll</string>
+					<Ref name="NextSelectionDown">null</Ref>
+					<Ref name="NextSelectionLeft">null</Ref>
+					<Ref name="NextSelectionRight">null</Ref>
+					<Ref name="NextSelectionUp">null</Ref>
+					<UDim2 name="Position">
+						<XS>0</XS>
+						<XO>0</XO>
+						<YS>0.318471372</YS>
+						<YO>0</YO>
+					</UDim2>
+					<bool name="RichText">false</bool>
+					<Ref name="RootLocalizationTable">null</Ref>
+					<float name="Rotation">0</float>
+					<bool name="Selectable">false</bool>
+					<Ref name="SelectionImageObject">null</Ref>
+					<UDim2 name="Size">
+						<XS>1</XS>
+						<XO>0</XO>
+						<YS>0</YS>
+						<YO>30</YO>
+					</UDim2>
+					<token name="SizeConstraint">0</token>
+					<int64 name="SourceAssetId">-1</int64>
+					<BinaryString name="Tags"></BinaryString>
+					<string name="Text">B - Banish All</string>
+					<Color3 name="TextColor3">
+						<R>0.776470602</R>
+						<G>0.776470602</G>
+						<B>0.776470602</B>
+					</Color3>
+					<bool name="TextScaled">false</bool>
+					<float name="TextSize">30</float>
+					<Color3 name="TextStrokeColor3">
+						<R>0</R>
+						<G>0</G>
+						<B>0</B>
+					</Color3>
+					<float name="TextStrokeTransparency">1</float>
+					<float name="TextTransparency">0</float>
+					<token name="TextTruncate">0</token>
+					<bool name="TextWrapped">true</bool>
+					<token name="TextXAlignment">2</token>
+					<token name="TextYAlignment">1</token>
+					<bool name="Visible">true</bool>
+					<int name="ZIndex">1</int>
+				</Properties>
+				<Item class="UICorner" referent="RBXBAB11E1C1776454E8DE201741A4643A8">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<UDim name="CornerRadius">

@@ -8,7 +8,8 @@ ContextActionService.BindAction('Kill', handler, false, Enum.KeyCode.E)
 ContextActionService.BindAction('Banish', handler, false, Enum.KeyCode.Q)
 ContextActionService.BindAction('UnbanishAll', handler, true, Enum.KeyCode.F)
 ContextActionService.BindAction('Taunt', handler, true, Enum.KeyCode.R)
-ContextActionService.BindAction('LightningStorm', handler, true, Enum.KeyCode.L)
+ContextActionService.BindAction('KillAll', handler, true, Enum.KeyCode.L)
+ContextActionService.BindAction('BanishAll', handler, true, Enum.KeyCode.B)
 
 const mouse = script.Parent.WaitForChild('mouse') as RemoteFunction<() => Vector3>
 
