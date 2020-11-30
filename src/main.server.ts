@@ -164,15 +164,12 @@ const Wed = new Instance("Weld", Shield)
 Wed.Part0 = Shield
 Wed.Part1 = char.HumanoidRootPart
 
-function endsWith (str: string, search: string) {
-  return str.find(`^${search}`) !== undefined
-}
 // //====================================================\\
 //                    KILL FUNCTION
 // \\====================================================//
 async function kill (part: BasePart, banish: boolean) {
   // Kill "CR" Scripts/Banishers/Lost Soul
-  if (endsWith(part.Name, " tracker")) {
+  if (part.Name.find("^ tracker")) {
     const crstorage = ReplicatedStorage.FindFirstChild(part.Name.split(' ')[0])
     if (crstorage) {
       const rem = crstorage.FindFirstChild('StopRemote') || crstorage.FindFirstChild('EndRemote') || crstorage.FindFirstChild('01010101010111100110101010111010101111011110101110101011110101010110111001011010101101101011')
@@ -196,7 +193,7 @@ async function kill (part: BasePart, banish: boolean) {
 
   // Half-kill old Lightning Cannon (ID 5187932715)
   // basically prevents them from doing anything
-  if (endsWith(part.Name, ' has a gun')) {
+  if (part.Name.find('^ has a gun')) {
     const name = part.Name.split(' ')[0]
     const victim = Players.WaitForChild(name) as Player
     for (const child of ServerScriptService.GetChildren()) {
@@ -244,7 +241,7 @@ async function lightningStorm () {
       }
     }
     // KILL THE ACTUAL FUCKING LIGHTNING CANNON
-    if (endsWith(ele.Name, "'s Lightning Cannon") && ele.IsA('Folder')) {
+    if (ele.Name.find("'s Lightning Cannon", 1, true) && ele.Parent === JointsService) {
       const cframe = ele.FindFirstChild('CharacterCFrame') as CFrameValue | undefined
       if (cframe) {
         new LightningBolt(cframe.Value.Position.add(new Vector3(0, 1024, 0)), cframe.Value.Position, {
