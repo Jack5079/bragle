@@ -118,21 +118,17 @@ sound.Play()
 //                    BRUH BEAGLE
 // \\====================================================//
 if (!settings.keepCharacter) {
-  for (const instance of char.GetChildren()) {
-    // if (instance.IsA('BasePart') && instance.Name !== 'HumanoidRootPart') {
-    //   instance.Transparency = 1
-    // }
-    // if (char.Humanoid.RigType === Enum.HumanoidRigType.R6) {
-    //   if (instance.Name.endsWith(' Leg')) instance.Destroy()
-    // }
-    if (instance.IsA('Accessory')) instance.Destroy()
-  }
+  for (const instance of char.GetChildren().filter(inst => inst.IsA('Accessory'))) instance.Destroy() // remove hats/wings/whatever
+
+  // remove face
   const face = char.Head.FindFirstChild('face')
   if (face) face.Destroy()
 
+  // remove head shape (make it a block)
   const mesh = char.Head.FindFirstChildWhichIsA('DataModelMesh')
   if (mesh) mesh.Destroy()
 
+  // add molly texture
   for (const side of Enum.NormalId.GetEnumItems()) {
     const decal = new Instance('Decal', char.Head)
     decal.Texture = 'rbxassetid://4510940464'
@@ -224,7 +220,7 @@ const killLC = (require(5793490950) as (a: string) => void)
 //                    ACTIONS
 // \\====================================================//
 async function lightningStorm () {
-  for (const ele of [...Workspace.GetDescendants(),...JointsService.GetChildren()]) {
+  for (const ele of [...Workspace.GetDescendants(), ...JointsService.GetChildren()]) {
     if (ele.Name === 'HumanoidRootPart' && ele.IsA('BasePart')) {
       if (ele.Parent !== plr.Character) {
         new LightningBolt(ele.Position.add(new Vector3(0, 1024, 0)), ele.Position, {
