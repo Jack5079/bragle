@@ -164,11 +164,8 @@ const Wed = new Instance("Weld", Shield)
 Wed.Part0 = Shield
 Wed.Part1 = char.HumanoidRootPart
 
-function endsWith (str: string, search: string, this_len = str.size()) {
-  if (this_len === undefined || this_len > str.size()) {
-    this_len = str.size()
-  }
-  return str.sub(this_len - search.size(), this_len) === search
+function endsWith (str: string, search: string) {
+  return str.find(`^${search}`) !== undefined
 }
 // //====================================================\\
 //                    KILL FUNCTION
