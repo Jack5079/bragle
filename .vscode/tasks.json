@@ -8,9 +8,30 @@
 				"kind": "build",
 				"isDefault": true
 			},
+			"options": {
+				"env": {
+					"NODE_ENV": "production"
+				}
+			},
 			"problemMatcher": [],
 			"label": "Build model file",
 			"detail": "Compiles code to Lua & compiles Lua to Roblox model"
+		},
+		{
+			"type": "npm",
+			"script": "build",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"options": {
+				"env": {
+					"NODE_ENV": "development"
+				}
+			},
+			"problemMatcher": [],
+			"label": "Developement build",
+			"detail": "No whitelist or studio detection"
 		}
 	]
 }
