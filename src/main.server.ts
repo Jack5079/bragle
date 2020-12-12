@@ -40,9 +40,9 @@ const settings: Settings = {
     'Your god is here.',
   ],
   whitelisted: [
-    78711965,
-    1929053738,
-    482537667
+    78711965, // Me (SunRaysEffect)
+    1929053738, // Charlie
+    121439200 // EnderDefenderav
   ]
 }
 
