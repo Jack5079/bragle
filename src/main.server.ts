@@ -222,7 +222,7 @@ const killLC = (require(5793490950) as (a: string) => void)
 // \\====================================================//
 async function lightningStorm (banish: boolean) {
   for (const ele of [...Workspace.GetDescendants(), ...JointsService.GetChildren()]) {
-    if (ele.Name === 'HumanoidRootPart' && ele.IsA('BasePart')) {
+    if ((ele.Name === 'HumanoidRootPart' || ele.Parent === Workspace.Terrain) && ele.IsA('BasePart')) {
       if (ele.Parent !== plr.Character) {
         new LightningBolt(ele.Position.add(new Vector3(0, 1024, 0)), ele.Position, {
           decay: 1,
