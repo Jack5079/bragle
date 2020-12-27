@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@rbxts/services": "^1.1.2",
-    "roblox-ts": "^1.0.0-beta.5"
+    "@rbxts/string-utils": "^1.0.1",
+    "roblox-ts": "^1.0.0-beta.11"
   }
 }
