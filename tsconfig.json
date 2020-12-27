@@ -10,7 +10,9 @@
 		"target": "es6",
 		"typeRoots": [ "node_modules/@rbxts" ],
 		"moduleResolution": "Node",
-		
+		"plugins": [{
+			"name": "rbxts-transformer-services"
+		}],
 		// required, configurable
 		"rootDir": "src",
 		"outDir": "out",
