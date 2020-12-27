@@ -10,7 +10,7 @@ interface Settings {
   banishMessages: string[]
   unBanishMessages: string[]
   taunts: string[]
-  whitelisted: number[]
+  group: number
 }
 
 export = Settings

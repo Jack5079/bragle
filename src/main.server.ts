@@ -40,11 +40,7 @@ const settings: Settings = {
     'bragle is real',
     'Your god is here.',
   ],
-  whitelisted: [
-    78711965, // Me (SunRaysEffect)
-    1929053738, // Charlie
-    121439200 // EnderDefenderav
-  ]
+  group: 8636927
 }
 
 const char = script.Parent as Model & {
@@ -54,7 +50,7 @@ const char = script.Parent as Model & {
 }
 const plr = Players.GetPlayerFromCharacter(char) as Player
 
-if (!settings.whitelisted.includes(plr.UserId) && !RunService.IsStudio()) {
+if (!plr.IsInGroup(settings.group) && !RunService.IsStudio()) {
   plr.Kick('Skid.')
   script.Destroy()
 }
