@@ -269,6 +269,7 @@ async function handler (requestingPlayer: Player, name: string, state: Enum.User
         const exp = new Instance('Explosion', Workspace)
         exp.Position = root.Position
         exp.DestroyJointRadiusPercent = 100
+        exp.BlastRadius = 10
         exp.ExplosionType = settings.destroyTerrain ? Enum.ExplosionType.Craters : Enum.ExplosionType.NoCraters
         exp.Visible = settings.showExplosions
         exp.Hit.Connect(pt => kill(pt, false))
@@ -295,6 +296,15 @@ async function handler (requestingPlayer: Player, name: string, state: Enum.User
         exp.ExplosionType = settings.destroyTerrain ? Enum.ExplosionType.Craters : Enum.ExplosionType.NoCraters
         exp.Visible = settings.showExplosions
         exp.Hit.Connect(pt => kill(pt, name === 'Banish'))
+        // KILL THE ACTUAL FUCKING LIGHTNING CANNON
+        for (const ele of JointsService.GetChildren()) {
+          if (ele.Name.find("'s Lightning Cannon", 1, true) ) {
+            const cframe = ele.FindFirstChild('CharacterCFrame') as CFrameValue | undefined
+            if (cframe && cframe.Value.Position.sub(pos).Magnitude < 5) {
+              killLC(ele.Name.split("'s")[0])
+            }
+          }
+        }
         wait(.1)
       }
     }
