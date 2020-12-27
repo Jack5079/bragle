@@ -30,8 +30,7 @@ const settings: Settings = {
   unBanishMessages: [
     'you are unbanished now lol',
     "you're unbanished now you can respawn",
-    'you are free now',
-    'RESURRECTED!'
+    'you are free now'
   ],
   taunts: [
     "ez",
