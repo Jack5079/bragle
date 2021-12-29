@@ -35,7 +35,6 @@ const settings: Settings = {
   taunts: [
     "ez",
     "you botta die lol",
-    'The almighty bragle strikes again!',
     'bragle is real',
     'Your god is here.',
   ],
@@ -117,12 +116,10 @@ if (!settings.keepCharacter) {
   for (const instance of char.GetChildren().filter(inst => inst.IsA('Accessory'))) instance.Destroy() // remove hats/wings/whatever
 
   // remove face
-  const face = char.Head.FindFirstChild('face')
-  if (face) face.Destroy()
+  char.Head.FindFirstChild('face')?.Destroy()
 
   // remove head shape (make it a block)
-  const mesh = char.Head.FindFirstChildWhichIsA('DataModelMesh')
-  if (mesh) mesh.Destroy()
+  char.Head.FindFirstChildWhichIsA('DataModelMesh')?.Destroy()
 
   // add molly texture
   for (const side of Enum.NormalId.GetEnumItems()) {

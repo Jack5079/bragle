@@ -12,9 +12,9 @@
   "license": "ISC",
   "devDependencies": {
     "@rbxts/compiler-types": "^1.0.0-beta.4.0",
+    "@rbxts/services": "^1.1.2",
     "@rbxts/types": "^1.0.428",
-    "rbxts-transformer-services": "^1.0.0",
-    "@rbxts/services": "^1.1.2"
+    "rbxts-transformer-services": "^1.0.0"
   },
   "dependencies": {
     "@rbxts/string-utils": "^1.0.1",
